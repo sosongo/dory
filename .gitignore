@@ -1,0 +1,239 @@
+## - Frequently
+.vagrant
+.vagrant/*
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+*.box
+pkg/
+build/
+
+## - OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+## - Thumbnails
+._*
+
+## - Files that might appear in the root of a volume
+.VolumeIcon.icns
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.com.apple.timemachine.donotpresent
+
+## - Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+## - .idea
+.idea/
+.idea_modules/
+.idea/replstate.xml
+.idea/httpRequests
+.idea/caches/build_file_checksums.ser
+.idea/sonarlint
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/**/mongoSettings.xml
+
+## - CMake
+cmake-build-*/
+
+## - JetBrains Templates
+**___jb_tmp___
+
+## - File-based project format
+*.iws
+
+## - IntelliJ
+out/
+
+## - JIRA plugin
+atlassian-ide-plugin.xml
+
+## - Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+## - Others
+*.iml
+modules.xml
+.idea/misc.xml
+*.ipr
+
+## - Ruby
+.ruby-version
+*.key
+*.pem
+*.ppk
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+
+## - RubyMotion
+.dat*
+.repl_history
+*.bridgesupport
+build-iPhoneOS/
+build-iPhoneSimulator/
+/.yardoc/
+/_yardoc/
+/doc/
+/rdoc/
+/.bundle/
+/vendor/bundle
+/lib/bundler/man/
+.rvmrc
+
+## - Bundler
+Gemfile.lock
+gems.locked
+bin/*
+.bundle/*
+.kitchen/
+kitchen.local.yml
+.berkshelf
+
+## - Chef
+Berksfile.lock
+.zero-knife.rb
+Policyfile.lock.json
+
+## - Temporary Files
+.fuse_hidden*
+
+## - KDE Directory Preferences
+.directory
+
+## - Linux Trash Folder
+.Trash-*
+
+## - .nfs Files
+.nfs*
+
+## - Ignore Byebug
+.byebug_history
+
+## - Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+## - Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+*.mo
+*.pot
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+docs/_build/
+target/
+.ipynb_checkpoints
+profile_default/
+ipython_config.py
+.python-version
+celerybeat-schedule
+*.sage.py
+
+## - Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+## - Spyder Project Settings
+.spyderproject
+.spyproject
+
+## - Rope Project Settings
+.ropeproject
+
+## - mkdocs Documentation
+/site
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/

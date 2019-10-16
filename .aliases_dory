@@ -1,0 +1,540 @@
+## --------------------------------------------------------------------------
+## - [ALIASES] : Dory
+## - [DevOps] : Renzo Cast | @sosongo
+## - Life, the Universe and Everything
+## --------------------------------------------------------------------------
+## --------------------------------------------------------------------------
+## - [SET] : TEXT_EDITOR and SHELL_MANAGER
+## --------------------------------------------------------------------------
+
+## - Get SO
+unameOut="$(uname -s)"
+case "${unameOut}" in
+  Linux*)   machine=LINUX;;
+  Darwin*)  machine=MAC;;
+  CYGWIN*)  machine=CYGWIN;;
+  MINGW*)   machine=MINGW;;
+  *)        machine="UNKNOWN:${unameOut}"
+esac
+
+## - Check SO
+if ! [[ " ${machine} " =~ "MAC" ]]; then
+  export TEXT_EDITOR=vim
+  export SHELL_MANAGER=.bashrc
+else
+  export TEXT_EDITOR=code
+  export SHELL_MANAGER=.zshrc
+fi
+
+## --------------------------------------------------------------------------
+## - [COLORS]
+## --------------------------------------------------------------------------
+
+YELLOW='\033[0;33m'
+YELLOW_DARK='\033[1;33m'
+BLUE="\033[0;34m"
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+PURPLE='\033[0;35m'
+CYAN='\033[0;36m'
+LIGHTPURPLE='\033[1;35m'
+LIGHTRED='\033[1;31m'
+WHITE='\033[1;37m'
+DARKGRAY='\033[1;30m'
+SET='\033[0m'
+
+## --------------------------------------------------------------------------
+## - [ECHO]
+## -------------------------------------------------------------------------
+
+alias echo="echo -e"
+
+## --------------------------------------------------------------------------
+## - [LS]
+## --------------------------------------------------------------------------
+
+alias ll='ls -alF'
+ls='ls --color=tty'
+grep='grep --color=auto'
+
+## --------------------------------------------------------------------------
+## - [CD]
+## --------------------------------------------------------------------------
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~"
+
+## --------------------------------------------------------------------------
+## - [TOOLS] : Functions
+## --------------------------------------------------------------------------
+
+my_title(){
+  echo "${RED}## --------------------------------------------------------------------------${SET}\r"
+  echo "${RED}## - ${YELLOW}[${1}] ${SET}: ${GREEN}${2}${SET}\r"
+  echo "${RED}## --------------------------------------------------------------------------${SET}\r"
+}
+
+my_line(){
+  echo "${1}\r"
+}
+
+## --------------------------------------------------------------------------
+## - [ALIASES] : Shell Aliases
+## --------------------------------------------------------------------------
+
+alias alias-dory="$TEXT_EDITOR ~/.aliases_dory"
+
+## --------------------------------------------------------------------------
+## - [SHELL] : Config | Update
+## --------------------------------------------------------------------------
+
+alias shell-config="$TEXT_EDITOR ~/$SHELL_MANAGER"
+alias shell-update="source ~/$SHELL_MANAGER"
+
+## --------------------------------------------------------------------------
+## - [SSH] : Config | Known Host | Keys
+## --------------------------------------------------------------------------
+
+alias ssh-config="$TEXT_EDITOR ~/.ssh/config"
+alias ssh-know="$TEXT_EDITOR ~/.ssh/known_hosts"
+alias ssh-key="$TEXT_EDITOR ~/.ssh/authorized_keys"
+
+## --------------------------------------------------------------------------
+## - [DORY] : Remember Commands
+## --------------------------------------------------------------------------
+
+alias dory="
+  clear
+  my_title 'IP' 'Get Ip Address'
+  my_line 'dig +short myip.opendns.com @resolver1.opendns.com'
+
+  my_title 'GIT' 'Skip local changes, overwrite with repository'
+  my_line 'git reset --hard origin/release'
+
+  my_title 'GIT' 'Solve Conflicts'
+  my_line 'git status'
+  my_line 'git diff'
+  my_line 'git checkout --theirs db/schema.rb'
+  my_line 'git add .'
+  my_line 'git commit'
+  my_line 'git push'
+
+  my_title 'DU' 'Locate Heavy Folders'
+  my_line 'cd / && sudo ncdu'
+  my_line 'sudo du -hs /* | sort -hr'
+
+  my_title 'SSH' 'Generate Key SSH'
+  my_line 'ssh-keygen -t rsa -b 4096'
+
+  my_title 'SSH' 'Remove Conflicts on ~/.ssh/known_hosts'
+  my_line 'ssh-keygen -R HOSTNAME'
+
+  my_title 'FORM' 'Delete Old Data'
+  my_line 'Fn + Shift + Delete'
+
+  my_title 'S.O.' 'Get Info'
+  my_line 'cat /etc/os-release'
+  my_line 'cat /etc/issue'
+  my_line 'lsb_release -a'
+  my_line 'hostnamectl'
+  my_line 'uname -a'
+  my_line 'uname -r'
+  my_line 'shasum -a 256'
+  "
+
+## --------------------------------------------------------------------------
+## - [GitHub]
+## -------------------------------------------------------------------------- 
+## - MAC : /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+## - MAC : brew install git
+## - MAC : brew install hub
+## - GNU/Linux: sudo add-apt-repository ppa:cpick/hub
+## - GNU/Linux: sudo apt-get update && sudo apt-get install hub
+## --------------------------------------------------------------------------
+
+alias git="hub"
+alias gco="git checkout"
+alias gs="git status"
+alias gl="git log"
+alias gd="git diff"
+alias gp="git pull"
+alias gpf="git pull -f"
+alias git-rh="echo 'git checkout release && git fetch && git reset --hard origin/release'"
+
+## --------------------------------------------------------------------------
+## - [PYTHON]
+## --------------------------------------------------------------------------
+
+alias pv="
+  clear
+  my_title 'PYTHON_VERSION' 'python --version && python3 --version'
+  python --version && python3 --version && echo '\r'
+  "
+
+## --------------------------------------------------------------------------
+## - [DOCKER] : Prune and Cleanup
+## --------------------------------------------------------------------------
+
+alias docker-prune="sh ~/docker-tools/docker_prune.sh"
+alias docker-cleanup="sh ~/docker-tools/docker_cleanup.sh"
+alias docker-kill="sh ~/docker-tools/docker_prune.sh && sh ~/docker-tools/docker_cleanup.sh"
+
+## --------------------------------------------------------------------------
+## - [DOCKER] : Compose
+## --------------------------------------------------------------------------
+
+alias dup="docker-compose up"
+alias dupb="docker-compose up --build"
+alias dtest="docker-compose exec app yarn test"
+alias dtestd="docker-compose exec app yarn test:debug"
+alias drmf="docker rm -f"
+alias dcrmf="docker-compose rm -f"
+alias dstop="docker-compose stop"
+
+## --------------------------------------------------------------------------
+## - [DOCKER] : Tools
+## --------------------------------------------------------------------------
+
+alias ds="
+  clear
+  my_title 'DOCKER' 'docker ps'
+  docker ps
+  my_title 'DOCKER' 'docker ps -a'
+  docker ps -a
+  my_title 'DOCKER' 'docker images'
+  docker images
+  "
+
+## --------------------------------------------------------------------------
+## - [IP_ADDRESSES]
+## - ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'
+## - curl ipinfo.io/ip
+## - dig +short myip.opendns.com @resolver1.opendns.com
+## --------------------------------------------------------------------------
+
+alias my-local-ip="ifconfig | grep 'inet ' | grep -v 127.0.0.1 | awk '{print \$2}'"
+alias local-ip="my-local-ip && my-local-ip | tr -d '\n' | pbcopy"
+
+alias my-get-ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias get-ip="my-get-ip && my-get-ip | tr -d '\n' | pbcopy"
+
+## --------------------------------------------------------------------------
+## - [CHECKSUM]
+## --------------------------------------------------------------------------
+
+alias checksum="shasum -a 256 $1"
+
+## --------------------------------------------------------------------------
+## - [SCP]
+## --------------------------------------------------------------------------
+
+alias dory-scp="
+  clear
+  my_title 'SCP' 'Download'
+  my_line 'scp -i ~/.ssh/id_rsa USERNAME@HOSTNAME:/PATH/YOUR_FILE ~/Downloads'
+  my_title 'SCP' 'Upload'
+  my_line 'scp -i ~/.ssh/id_rsa FILE_UPLOAD USERNAME@HOSTNAME:/REMOTE_PATH/'
+  "
+
+## --------------------------------------------------------------------------
+## - [SPACE] : Space on Disk
+## --------------------------------------------------------------------------
+
+alias space-server="sudo du -hs /* | sort -hr"
+
+alias dory-space="
+  clear
+  my_title 'SPACE' 'View Disk Space'
+  my_line 'df -h'
+
+  my_title 'SPACE' 'View Space in iNodes'
+  my_line 'df -hi'
+
+  my_title 'SPACE' 'Locate Heavy Folders'
+  my_line 'sudo du -hs /* | sort -hr'
+
+  my_title 'PACKAGES' 'To delete downloaded packages (.deb) already installed (and no longer needed)'
+  my_line 'sudo apt-get clean'
+
+  my_title 'PACKAGES' 'To remove all stored archives in your cache for packages that can not be downloaded'
+  my_line 'sudo apt-get autoclean'
+
+  my_title 'PACKAGES' 'To remove unnecessary packages'
+  my_line 'sudo apt-get autoremove -f \n'
+
+  my_title 'PACKAGES' 'Adjust packages'
+  my_line 'sudo apt-get install -f'
+
+  my_title 'KERNELS' 'View Installed Kernels'
+  my_line 'dpkg --get-selections | grep linux'
+
+  my_title 'KERNELS' 'Remove Kernels'
+  my_line 'sudo dpkg -P linux-headers-...'
+  my_line 'sudo dpkg -P linux-image-...'
+  "
+
+## --------------------------------------------------------------------------
+## - [DISK] : Disk Tools
+## --------------------------------------------------------------------------
+
+alias dory-disk="
+  clear
+  my_title 'DISK' 'View mount partitions'
+  my_line 'sudo blkid -o list'
+
+  my_title 'DISK' 'View All Partitions'
+  my_line 'cat /proc/partitions'
+
+  my_title 'DISK' 'Format and Set Disk'
+  my_line 'sudo mkfs -t ext4 /dev/MOUNTING_POINT'
+  my_line 'sudo mkfs -t ext4 /dev/xvdb'
+
+  my_title 'DISK' 'Mount on fstab'
+  my_line '"\echo" "\""/dev/MOUNTING_POINT /mnt ext4 noatime 0 0"\"" | sudo tee -a /etc/fstab'
+  my_line '"\echo" "\""/dev/xvdb /mnt ext4 noatime 0 0"\"" | sudo tee -a /etc/fstab'
+
+  my_title 'DISK' 'Permissions on mounting point'
+  my_line 'sudo chmod -R 777 /mnt'
+  my_line 'sudo chown -R www-data:www-data /mnt/'
+  my_line 'sudo find /home/www-data -type d -exec chmod u+rwx {} +'
+  my_line 'sudo find /home/www-data -type f -exec chmod u+rw {} +'
+  "
+
+## --------------------------------------------------------------------------
+## - [DORY-DOCKER] : Docker
+## --------------------------------------------------------------------------
+
+alias dory-docker="
+  clear
+  my_title 'DOCKER' 'Show Version'
+  my_line 'docker --version'
+  
+  my_title 'DOCKER' 'Show All Containers Running'
+  my_line 'docker ps'
+
+  my_title 'DOCKER' 'Show All Containers'
+  my_line 'docker ps -a'
+  
+  my_title 'DOCKER' 'Show All Images'
+  my_line 'docker images'
+  
+  my_title 'DOCKER' 'Remove Images'
+  my_line 'docker rmi -f IMAGE-ID'
+  
+  my_title 'DOCKER' 'Logs'
+  my_line 'docker logs -f DOCKER_ID'
+  
+  my_title 'DOCKER' 'Prune'
+  my_line 'docker network prune --force'
+  my_line 'docker volume prune --force'
+  my_line 'docker system prune --force'
+  
+  my_title 'DOCKER' 'Cleanup'
+  my_line 'docker ps -q | xargs --no-run-if-empty docker stop'
+  my_line 'docker ps -q -a | xargs --no-run-if-empty docker rm --force --volumes'
+  my_line 'docker volume ls -q | xargs --no-run-if-empty docker volume rm'
+  my_line 'docker images -a -q | xargs --no-run-if-empty docker rmi -f'
+  
+  my_title 'DOCKER' 'Kill Process [HARD WAY]'
+  my_line 'ps -aux | grep docker'
+  my_line 'kill -9 ID_PID'
+  
+  my_title 'DOCKER' 'Example for run a project'
+  my_line 'cd ~/devel'
+  my_line 'git clone git@github.com:YOUR_PROJECT/SUPER-PROJECT.git'
+  my_line 'cd SUPER-PROJECT'
+  my_line 'docker build -t app .'
+  my_line 'docker run -it -p 80:80 --name app app:latest'
+  my_line 'docker exec -it app bash'
+  "
+
+## --------------------------------------------------------------------------
+## - [KUBERNETES]
+## --------------------------------------------------------------------------
+
+alias k8s-list="gcloud container clusters list"
+alias k8s-context="kubectl config get-contexts"
+
+## --------------------------------------------------------------------------
+## - [DORY-GCP] : GKE and GCP
+## --------------------------------------------------------------------------
+
+alias dory-gcp="
+  clear
+  my_title 'GCP' 'Projects'
+  my_line 'gcloud projects list --sort-by=projectId --limit=100'
+
+  my_title 'GCP' 'Config'
+  my_line 'gcloud config list'
+  my_line 'gcloud config list project'
+
+  my_title 'GCP' 'Components'
+  my_line 'gcloud components list'
+  my_line 'gcloud components update'
+
+  my_title 'GCP' 'Cluster'
+  my_line 'kubectl cluster-info'
+  my_line 'gcloud container clusters list'
+  my_line 'gcloud container clusters get-credentials CLUSTER_NAME --zone ZONE_NAME'
+
+  my_title 'GCP' 'Context'
+  my_line 'kubectl config get-contexts'
+  my_line 'kubectl config use-context CONTEXT_NAME'
+
+  my_title 'GCP' 'Instances'
+  my_line 'gcloud compute instances list'
+
+  my_title 'GCP' 'Scale Replicas'
+  my_line 'kubectl config get-contexts'
+  my_line 'kubectl config use-context CONTEXT_NAME'
+  my_line 'kubectl scale deployment.v1.apps/DEPLOYMENT_NAME --replicas=1'
+
+  my_title 'GCP' 'Nodes | Pods'
+  my_line 'kubectl get nodes'
+  my_line 'kubectl get pods'
+  my_line 'kubectl describe pod POD_NAME'
+
+  my_title 'GCP' 'List Container Registry'
+  my_line 'gcloud container images list'
+
+  my_title 'GCP' 'Ingress'
+  my_line 'kubectl config get-contexts'
+  my_line 'kubectl config use-context CONTEXT_NAME'
+  my_line 'kubectl apply -f INGRESS_FILE.yml --namespace YOUR_NAME_SPACE'
+
+  my_title 'GCP' 'Scale Replicas'
+  my_line 'kubectl scale --replicas=0 deployment ${YELLOW}[DEPLOYMENT_NAME]${SET}'
+
+  my_title 'HISTORY' 'History Rollout'
+  my_line 'kubectl rollout history deployment.v1.apps/${YELLOW}[DEPLOYMENT_NAME]${SET}'
+
+  my_title 'ROLLOUT' 'Rollout Undo and Rollout by Revision'
+  my_line 'kubectl rollout undo deployment.v1.apps/${YELLOW}[DEPLOYMENT_NAME]${SET}'
+  my_line 'kubectl rollout history deployment.v1.apps/${YELLOW}[DEPLOYMENT_NAME]${SET} --revision=${YELLOW}[REVISION_NUM]${SET}'
+
+  my_title 'DEPLOY' 'Deploy Service'
+  my_line 'git clone git@github.com:YOUR_ACCOUNT/PROJECT_NAME.git'
+  my_line 'cd PROJECT_NAME'
+  my_line 'docker build -t PROJECT_NAME .'
+  my_line 'docker tag PROJECT_NAME gcr.io/co-gcp/PROJECT_NAME'
+  my_line 'gcloud docker -- push gcr.io/co-gcp/PROJECT_NAME'
+  my_line 'gcloud container images list'
+  my_line 'kubectl create -f k8s/PROJECT_NAME-deployment.yml'
+  my_line 'kubectl create -f k8s/NAME_PROJECT-service.yml'
+  "
+
+## --------------------------------------------------------------------------
+## - [DORY-POSTGRESQL] : PostgreSQL
+## --------------------------------------------------------------------------
+
+alias dory-postgresql="
+  clear
+  my_title 'POSTGRESQL' 'Querying Schema Privileges'
+  my_line '\dn+'
+
+  my_title 'POSTGRESQL' 'DUMP DATABASE'
+  my_title 'pg_dump -h "\"DB_HOST"\" -p 5432 --no-acl --no-owner -n public -U "\"DB_USER"\" -F c -b -v -f "\"/mnt/backup/devops/BACKUP_NAME_.backup"\" DB_NAME '
+  my_title 'pg_dump --host="\"DB_HOST"\" --username="\"DB_USER"\" "\"DB_NAME"\" --no-acl --no-owner --column-inserts > "\"/mnt/backup/devops/DB_NAME.sql"\"'
+  
+  my_title 'POSTGRESQL' 'DOWNLOAD DUMP'
+  my_line 'scp -i ~/.ssh/id_rsa USERNAME@HOSTNAME:/PATH/YOUR_FILE ~/Downloads'
+
+  my_title 'POSTGRESQL' 'CREATE DATABASE'
+  my_line 'psql --host="\"YOUR_DB_HOST"\" --port=5432 --username="\"postgres"\" --password --dbname="\"postgres"\"'
+  my_line 'CREATE DATABASE "\"DB_NAME"\";'
+  my_line 'CREATE USER "\"DB_USER"\" WITH PASSWORD \x27DB_PASSWORD\x27;'
+  my_line 'GRANT ALL PRIVILEGES on DATABASE "\"DB_NAME"\" to "\"DB_USER"\";'
+  my_line '\q'
+
+  my_title 'POSTGRESQL' 'EXTENSIONS'
+  my_line 'psql --host="\"YOUR_DB_HOST"\" --port=5432 --username="\"postgres"\" --password --dbname="\"DB_NAME"\"'
+  my_line 'CREATE EXTENSION "\"uuid-ossp"\";'
+  my_line '\q'
+
+  my_title 'POSTGRESQL' 'PERMISSIONS'
+  my_line 'psql --host="\"YOUR_DB_HOST"\" --port=5432 --username="\"DB_USER"\" --password --dbname="\"DB_NAME"\"'
+  my_line 'GRANT ALL ON SCHEMA public TO "\"DB_NAME"\";'
+  my_line 'ALTER default privileges in schema public grant all on tables to "\"DB_USER"\";'
+  my_line 'ALTER default privileges in schema public grant all on sequences to "\"DB_USER"\";'
+  my_line '\q'
+  
+  my_title 'POSTGRESQL' 'RESTORE DATABASE'
+  my_line 'pg_restore -h "\"DB_HOST"\" -p 5432 -U "\"DB_USER"\" -d "\"DB_NAME"\" -v --no-owner "\"/PATH/DUMP_DATABASE.backup"\"'
+  my_line 'psql --host="\"DB_HOST"\" --username="\"DB_USER"\" -d "\"DB_NAME"\" -v --no-owner -f "\"/PATH/DUMP_DATABASE.sql"\"'
+
+  my_title 'POSTGRESQL' 'DROP DATABASE'
+  my_line 'dropdb --host="\"DB_HOST"\" --username="\"DB_USER"\" -i -e "\"DB_NAME"\"'
+
+  my_title 'POSTGRESQL' 'DATABASE SIZE'
+  my_line 'SELECT t1.datname AS "\"DB_NAME"\", pg_size_pretty(pg_database_size(t1.datname)) as db_size'
+  my_line 'FROM pg_database t1'
+  my_line 'ORDER BY pg_database_size(t1.datname) desc;'
+  
+  my_title 'POSTGRESQL' 'KILL CONNECTIONS'
+  my_line 'SELECT pg_terminate_backend(pg_stat_activity.pid)'
+  my_line 'FROM pg_stat_activity'
+  my_line 'WHERE pg_stat_activity.datname = "\"DB_TARGET"\"'
+  my_line 'AND pid <> pg_backend_pid();'
+  "
+
+## --------------------------------------------------------------------------
+## - [DORY-MYSQL] : MySQL
+## --------------------------------------------------------------------------
+
+alias dory-mysql="
+  clear
+  my_title 'MYSQL' 'CONNECTION'
+  my_line 'mysql --user "\"DB_USER"\" --password -h "\"DB_HOST"\" -P 3306 "\"DB_NAME"\"'
+
+  my_title 'MYSQL' 'VIEW DATABASE'
+  my_line 'show databases;'
+
+  my_title 'MYSQL' 'USER LIST'
+  my_line 'SELECT user, host FROM mysql.user;'
+
+  my_title 'MYSQL' 'Users List with their databases and permissions'
+  my_line 'select u.User,Db from mysql.user u,mysql.db d where u.User=d.User;'
+
+  my_title 'MYSQL' 'VIEW PERMISSIONS'
+  my_line 'SHOW GRANTS FOR 'DB_USER'@'%';'
+  "
+
+## --------------------------------------------------------------------------
+## - [DORY-S3] : AWS -> S3
+## --------------------------------------------------------------------------
+
+alias dory-s3="
+  clear
+  my_title 'AWS' 's3 sync'
+  my_line 'aws s3 sync s3://BUCKET-S3-NAME /LOCAL-PATH/.'
+
+  my_title 'AWS' 's3 cp'
+  my_line 'aws s3 cp /LOCAL-PATH s3://BUCKET-S3_NAME'
+  "
+
+## --------------------------------------------------------------------------
+## - [KNIFE]
+## --------------------------------------------------------------------------
+
+alias dory-knife="
+  clear
+  my_title 'KNIFE' 'Utils Commands'
+  my_line 'knife --version'
+  my_line 'knife configure'
+  my_line 'knife list'
+  my_line 'knife cookbooks list'
+  my_line 'knife know list'
+  my_line 'knife environment list'
+  my_line 'knife environment show YOUR_ENVIRONMENT'
+  my_line 'knife environment from file YOUR_ENVIRONMENT.rb'
+  "
+
+## --------------------------------------------------------------------------
+## - [UTILS]
+## --------------------------------------------------------------------------
+
+## - WTTR
+alias wttr="curl -s http://wttr.in/santiago_de_chile"
