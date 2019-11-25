@@ -102,6 +102,9 @@ alias ssh-config="$TEXT_EDITOR ~/.ssh/config"
 alias ssh-know="$TEXT_EDITOR ~/.ssh/known_hosts"
 alias ssh-key="$TEXT_EDITOR ~/.ssh/authorized_keys"
 
+alias my-ssh-key="cat ~/.ssh/id_rsa.pub"
+alias get-ssh-key="my-ssh-key && my-ssh-key | tr -d '\n' | pbcopy"
+
 ## --------------------------------------------------------------------------
 ## - [DORY] : Remember Commands
 ## --------------------------------------------------------------------------
@@ -143,6 +146,34 @@ alias dory="
   my_line 'uname -a'
   my_line 'uname -r'
   my_line 'shasum -a 256'
+  "
+## --------------------------------------------------------------------------
+## - [CHEF] : Remember Commands CHEF
+## --------------------------------------------------------------------------
+
+alias dory-chef="
+  clear
+  my_title 'CHEF' 'Delete Cache Chef'
+  my_line 'rm -rf /var/cache/chef/* && rm -rf /var/chef/*'
+
+  my_title 'CHEF' 'chef-client'
+  my_line 'chef-client -l info'
+  my_line 'chef-client -l debug -o "\""recipe[base]"\""'
+
+  my_title 'CHEF' 'chef-client : [OFF]'
+  my_line 'service chef-client stop'
+  my_line 'chkconfig chef-client off'
+  my_line 'service chef-client status'
+  "
+
+## --------------------------------------------------------------------------
+## - [NETWORKING] : Remember Commands Networking
+## --------------------------------------------------------------------------
+
+alias dory-networking="
+  clear
+  my_title 'NETWORKING' 'Commands Networking'
+  my_line 'watch "\""netstat -an |grep tcp| grep LISTEN | sort"\""'
   "
 
 ## --------------------------------------------------------------------------
@@ -237,6 +268,16 @@ alias dory-scp="
   my_line 'scp -i ~/.ssh/id_rsa USERNAME@HOSTNAME:/PATH/YOUR_FILE ~/Downloads'
   my_title 'SCP' 'Upload'
   my_line 'scp -i ~/.ssh/id_rsa FILE_UPLOAD USERNAME@HOSTNAME:/REMOTE_PATH/'
+  "
+
+## --------------------------------------------------------------------------
+## - [TAR]
+## --------------------------------------------------------------------------
+
+alias dory-tar="
+  clear
+  my_title 'TAR' 'Compress Folder'
+  my_line 'tar czvf FOLDER.tar.gz /PATH/*'
   "
 
 ## --------------------------------------------------------------------------
